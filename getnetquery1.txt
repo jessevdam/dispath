@@ -1,0 +1,34 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX diva: <http://ssb.wur.nl/diva/>	
+prefix xml: <http://ssb.wur.nl/XML/> 
+prefix xgmml: <http://www.cs.rpi.edu/XGMML/>
+prefix gpml: <http://pathvisio.org/GPML/2013a/>
+
+SELECT ?pathway ?database ?id
+FROM <http://ssb.wur.nl/gpml>
+WHERE
+{
+  ?node a xml:Root .
+  ?node gpml:Name ?pathway .
+  ?node xml:child/xml:child ?child .
+  ?child a gpml:Xref .
+  ?child gpml:Database ?database .
+  ?child gpml:ID ?id .
+  FILTER(?database != "")
+ # xml:root xml:child ?nodes .
+ # ?nodes a xgmml:node .
+ # ?nodes xgmml:label ?label .
+ # ?nodes xgmml:aliasName ?aliasName .
+ # ?nodes xgmml:id ?id .
+ # xml:root xml:child ?edges .
+ # ?edges a xgmml:edge .
+ # ?edges xgmml:source ?source .
+ # ?sourceNode xgmml:id ?source .
+ # ?edges xgmml:target ?dest .
+ # ?destNode xgmml:id ?dest .
+
+}
+#LIMIT 100
+#ORDER BY ?domain

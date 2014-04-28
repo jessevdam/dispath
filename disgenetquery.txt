@@ -1,0 +1,11 @@
+select distinct ?geneid	?doidId	?diseaseName
+{
+  ?gda sio:SIO_000628 ?gene,?disease .
+  ?gene rdf:type ncit:C16612 .
+  ?gene dcterms:identifier ?geneid .
+  ?disease rdf:type ncit:C7057 .
+  ?disease foaf:name ?diseaseName .
+  ?disease owl:sameAs ?dxref .
+  filter regex(?dxref,"DOID") .
+  ?dxref dcterms:identifier ?doidId .
+}
